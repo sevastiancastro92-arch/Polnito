@@ -25,19 +25,19 @@
         aside {
             width: var(--sidebar-width); background: var(--side); height: 100%; 
             border-right: 1px solid var(--border); display: flex; flex-direction: column; 
-            padding: 2rem 1.5rem; gap: 1.5rem; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 2rem 1.5rem; gap: 1rem; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative; z-index: 1001;
         }
         body.sidebar-hidden aside { margin-left: calc(-1 * var(--sidebar-width)); opacity: 0; pointer-events: none; }
 
-        .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-align: center; margin-bottom: 10px; }
+        .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-align: center; margin-bottom: 20px; }
         .logo span { color: var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
 
-        .menu-label { font-size: 0.65rem; color: #444; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px; margin-top: 10px; }
+        .menu-label { font-size: 0.65rem; color: #444; text-transform: uppercase; letter-spacing: 1.5px; margin: 10px 0 5px 5px; }
         .nav-btn {
             width: 100%; background: none; border: none; color: #888; display: flex; 
             align-items: center; gap: 12px; padding: 12px; cursor: pointer; 
-            border-radius: 12px; transition: 0.3s; font-size: 0.95rem;
+            border-radius: 12px; transition: 0.3s; font-size: 0.9rem;
         }
         .nav-btn:hover { background: var(--glass); color: white; }
         .nav-btn.active { border-left: 3px solid var(--accent); background: linear-gradient(90deg, rgba(255,0,85,0.1), transparent); color: white; }
@@ -51,51 +51,52 @@
             border-bottom: 1px solid var(--border);
         }
 
-        /* CONTADOR DE VISITAS TOTALES */
+        /* CONTADOR DE VISITAS NEÓN */
         .visitor-counter {
-            background: rgba(255, 0, 85, 0.05); border: 1px solid var(--accent);
-            color: var(--accent); padding: 6px 16px; border-radius: 50px;
-            font-size: 0.75rem; font-weight: 900; display: flex; align-items: center; gap: 8px;
-            text-transform: uppercase; letter-spacing: 1px;
+            background: rgba(255, 0, 85, 0.1); border: 1px solid var(--accent);
+            color: var(--accent); padding: 8px 18px; border-radius: 50px;
+            font-size: 0.8rem; font-weight: 900; display: flex; align-items: center; gap: 10px;
+            transition: 0.3s;
+        }
+        .visitor-counter.flash {
+            animation: neonFlash 0.5s ease-in-out;
         }
 
-        .left-controls { display: flex; align-items: center; gap: 15px; flex: 1; }
+        @keyframes neonFlash {
+            0% { box-shadow: 0 0 0px var(--accent); transform: scale(1); }
+            50% { box-shadow: 0 0 20px var(--accent); transform: scale(1.1); }
+            100% { box-shadow: 0 0 0px var(--accent); transform: scale(1); }
+        }
+
         .toggle-menu { background: var(--glass); border: 1px solid var(--border); color: white; width: 40px; height: 40px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-        .search-box { background: var(--glass); border: 1px solid var(--border); padding: 8px 15px; border-radius: 10px; display: flex; align-items: center; gap: 10px; width: 100%; max-width: 300px; }
-        .search-box input { background: none; border: none; color: white; width: 100%; outline: none; }
+        .search-box { background: var(--glass); border: 1px solid var(--border); padding: 8px 15px; border-radius: 10px; display: flex; align-items: center; gap: 10px; width: 250px; }
+        .search-box input { background: none; border: none; color: white; width: 100%; outline: none; font-size: 0.8rem; }
 
         /* VIDEO GRID */
         .content-section { padding: 2rem; }
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
         .card { background: var(--side); border-radius: 15px; overflow: hidden; border: 1px solid var(--border); transition: 0.4s; }
-        .card:hover { transform: translateY(-8px); border-color: var(--accent); }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .card-thumb iframe { width: 100%; aspect-ratio: 16/9; border: none; }
         .card-info { padding: 15px; }
-        .card-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 12px; color: #eee; }
+        .card-title { font-weight: 600; font-size: 0.85rem; margin-bottom: 12px; color: #eee; }
+        .actions { display: flex; gap: 8px; }
         .btn-icon { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--glass); color: white; cursor: pointer; transition: 0.3s; }
-        .btn-icon.active { background: var(--blue); }
+        .btn-icon.active { background: var(--blue); border-color: var(--blue); }
 
-        /* MODAL OPCIONES DE CUENTA */
-        #account-modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.85);
-            display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(8px);
-        }
-        .modal-content {
-            background: var(--side); padding: 2.5rem; border-radius: 30px; border: 1px solid var(--accent);
-            width: 350px; text-align: center; box-shadow: 0 0 50px rgba(255,0,85,0.2); animation: pop 0.3s ease;
-        }
-        @keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        
-        .modal-btn { width: 100%; padding: 14px; margin-top: 12px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        /* MODAL */
+        #account-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(10px); }
+        .modal-content { background: var(--side); padding: 2.5rem; border-radius: 30px; border: 1px solid var(--accent); width: 350px; text-align: center; }
+        .modal-btn { width: 100%; padding: 14px; margin-top: 10px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; }
         .logout-btn { background: var(--accent); color: white; }
-        .close-btn { background: var(--glass); color: #888; border: 1px solid var(--border); }
+        .close-btn { background: var(--glass); color: #888; }
 
         /* LOGIN OVERLAY */
-        #login-overlay { position: fixed; inset: 0; background: radial-gradient(circle, #1a1a1e, #050505); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        #login-overlay { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .login-box { text-align: center; padding: 3rem; background: var(--side); border-radius: 35px; border: 1px solid var(--accent); width: 90%; max-width: 400px; }
-        .google-btn { width: 100%; padding: 16px; border-radius: 14px; border: none; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; background: white; color: black; margin-top: 2rem; }
-        .guest-btn { width: 100%; padding: 14px; border-radius: 14px; border: 1px solid var(--border); background: transparent; color: #888; cursor: pointer; margin-top: 10px; }
+        .google-btn { width: 100%; padding: 16px; border-radius: 14px; border: none; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; background: white; color: black; margin-top: 1.5rem; }
+        .guest-btn { width: 100%; padding: 14px; border-radius: 14px; border: 1px solid var(--border); background: transparent; color: #555; cursor: pointer; margin-top: 10px; }
 
         #toast { position: fixed; bottom: 20px; right: 20px; background: var(--accent); padding: 12px 25px; border-radius: 10px; transform: translateY(100px); transition: 0.5s; z-index: 10000; font-weight: bold; }
     </style>
@@ -105,36 +106,32 @@
     <div id="login-overlay">
         <div class="login-box">
             <h1 class="logo">X<span>MODDER</span></h1>
-            <p style="color:#666; margin-top: 0.5rem; letter-spacing: 2px;">MODS & PREMIUM CONTENT</p>
-            <button class="google-btn" id="btn-login"><img src="https://www.google.com/favicon.ico" width="20"> INICIAR CON GOOGLE</button>
-            <button class="guest-btn" id="btn-guest">Entrar más tarde (Invitado)</button>
+            <p style="color:#444; font-size: 0.8rem; letter-spacing: 2px;">PREMIUM SYSTEM</p>
+            <button class="google-btn" id="btn-login"><img src="https://www.google.com/favicon.ico" width="20"> GOOGLE LOGIN</button>
+            <button class="guest-btn" id="btn-guest">EXPLORAR COMO INVITADO</button>
         </div>
     </div>
 
     <div id="account-modal">
         <div class="modal-content">
-            <i class="ph-bold ph-gear-six" style="font-size: 3rem; color: var(--accent);"></i>
-            <h3 style="margin: 15px 0;">Configuración</h3>
-            <p id="user-display-email" style="font-size: 0.8rem; color: #666; margin-bottom: 20px;">Sesión de invitado</p>
-            <button class="modal-btn logout-btn" id="btn-logout-final">Cerrar Sesión</button>
-            <button class="modal-btn close-btn" onclick="toggleModal(false)">Cerrar Ventana</button>
+            <i class="ph-bold ph-user-gear" style="font-size: 3.5rem; color: var(--accent);"></i>
+            <h2 style="margin: 15px 0;">Mi Cuenta</h2>
+            <p id="user-display-email" style="font-size: 0.8rem; color: #555; margin-bottom: 25px;"></p>
+            <button class="modal-btn logout-btn" id="btn-logout-final">CERRAR SESIÓN</button>
+            <button class="modal-btn close-btn" onclick="toggleModal(false)">VOLVER</button>
         </div>
     </div>
 
     <aside id="sidebar">
         <div class="logo">X<span>MODDER</span></div>
         
-        <div>
-            <p class="menu-label">Mi Cuenta</p>
-            <button class="nav-btn" onclick="toggleModal(true)" style="color: var(--blue); background: rgba(0, 210, 255, 0.05);"><i class="ph-bold ph-user-gear"></i> Opciones de la cuenta</button>
-        </div>
+        <p class="menu-label">Configuración</p>
+        <button class="nav-btn" onclick="toggleModal(true)" style="color: var(--blue); background: rgba(0,210,255,0.05);"><i class="ph-bold ph-gear-six"></i> Opciones de la cuenta</button>
 
-        <div>
-            <p class="menu-label">Contenido</p>
-            <button class="nav-btn active" onclick="changeTab('all', this)"><i class="ph-bold ph-house"></i> Inicio</button>
-            <button class="nav-btn" onclick="changeTab('favorites', this)"><i class="ph-bold ph-heart"></i> Favoritos</button>
-            <button class="nav-btn" onclick="changeTab('watchLater', this)"><i class="ph-bold ph-clock"></i> Ver más tarde</button>
-        </div>
+        <p class="menu-label">Navegación</p>
+        <button class="nav-btn active" onclick="changeTab('all', this)"><i class="ph-bold ph-house"></i> Inicio</button>
+        <button class="nav-btn" onclick="changeTab('favorites', this)"><i class="ph-bold ph-heart"></i> Mis Favoritos</button>
+        <button class="nav-btn" onclick="changeTab('watchLater', this)"><i class="ph-bold ph-clock"></i> Ver más tarde</button>
     </aside>
 
     <main>
@@ -143,21 +140,21 @@
                 <button class="toggle-menu" id="toggle-btn"><i class="ph-bold ph-list"></i></button>
                 <div class="search-box">
                     <i class="ph-bold ph-magnifying-glass"></i>
-                    <input type="text" id="search-input" placeholder="Buscar mods o videos...">
+                    <input type="text" id="search-input" placeholder="Buscar...">
                 </div>
             </div>
             
-            <div style="display: flex; align-items: center; gap: 20px;">
-                <div class="visitor-counter">
-                    <i class="ph-fill ph-users"></i>
-                    <span id="v-count">0</span> Visitas
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="visitor-counter" id="visitor-box">
+                    <i class="ph-fill ph-chart-line-up"></i>
+                    <span id="v-count">0</span> VISITAS
                 </div>
-                <img id="user-img" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="35" style="border-radius: 50%; border: 2px solid var(--border);">
+                <img id="user-img" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="32" style="border-radius: 50%; border: 2px solid var(--border);">
             </div>
         </div>
 
         <section class="content-section">
-            <h2 id="section-title" style="margin-bottom: 2rem;">Explorar XMODDER</h2>
+            <h2 id="section-title" style="margin-bottom: 1.5rem; font-size: 1.2rem;">Contenido Recomendado</h2>
             <div class="video-grid" id="main-grid"></div>
         </section>
     </main>
@@ -167,7 +164,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getDatabase, ref, onValue, set, remove, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getDatabase, ref, onValue, set, remove, runTransaction, increment } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCEM7fa1Erl2NLpM8VTRYCVyHW-cl-JEjw",
@@ -189,23 +186,28 @@
         let userMetadata = {};
         let isFirstLoad = true;
 
-        // --- LÓGICA DE VISITAS TOTALES (ACUMULABLE) ---
-        const totalVisitsRef = ref(db, 'stats/totalVisits');
-        
-        // Solo aumenta la cuenta si es una sesión nueva en el navegador
-        if (!sessionStorage.getItem('counted')) {
-            runTransaction(totalVisitsRef, (currentValue) => {
-                return (currentValue || 0) + 1;
-            });
-            sessionStorage.setItem('counted', 'true');
-        }
+        // --- LÓGICA DE VISITAS EN TIEMPO REAL CORREGIDA ---
+        const visitsRef = ref(db, 'stats/totalVisits');
 
-        // Actualización en tiempo real del número
-        onValue(totalVisitsRef, (snap) => {
-            document.getElementById('v-count').innerText = snap.val() || 0;
+        // 1. Incrementar solo una vez por carga de página
+        runTransaction(visitsRef, (curr) => (curr || 0) + 1);
+
+        // 2. Escuchar cambios de CUALQUIER usuario en el mundo
+        onValue(visitsRef, (snapshot) => {
+            const count = snapshot.val() || 0;
+            const counterElement = document.getElementById('v-count');
+            const boxElement = document.getElementById('visitor-box');
+
+            // Actualizar número
+            counterElement.innerText = count.toLocaleString();
+            
+            // Efecto Visual Neón (Solo si el número cambia)
+            boxElement.classList.remove('flash');
+            void boxElement.offsetWidth; // Truco para reiniciar la animación CSS
+            boxElement.classList.add('flash');
         });
 
-        // MODAL
+        // --- UI & AUTH ---
         window.toggleModal = (show) => {
             document.getElementById('account-modal').style.display = show ? 'flex' : 'none';
         };
@@ -216,10 +218,9 @@
             toggleModal(false);
         };
 
-        // UI & AUTH
         document.getElementById('btn-guest').onclick = () => {
             document.getElementById('login-overlay').style.display = 'none';
-            showToast("Modo Invitado Activo");
+            showToast("Modo invitado activo");
         };
 
         document.getElementById('toggle-btn').onclick = () => document.body.classList.toggle('sidebar-hidden');
@@ -233,12 +234,8 @@
                 document.getElementById('user-img').style.borderColor = "var(--accent)";
                 document.getElementById('user-display-email').innerText = user.email;
                 syncData();
-
                 if (isFirstLoad) {
-                    setTimeout(() => {
-                        document.body.classList.add('sidebar-hidden');
-                        isFirstLoad = false;
-                    }, 2000);
+                    setTimeout(() => { document.body.classList.add('sidebar-hidden'); isFirstLoad = false; }, 2000);
                 }
             } else {
                 currentUID = null;
@@ -265,12 +262,10 @@
             const grid = document.getElementById('main-grid');
             grid.innerHTML = '';
             const searchVal = document.getElementById('search-input').value.toLowerCase();
-
             for (let id in data) {
                 const video = data[id];
                 const isFav = userMetadata.favorites?.[id];
                 const isLater = userMetadata.watchLater?.[id];
-
                 if(filter === 'favorites' && !isFav) continue;
                 if(filter === 'watchLater' && !isLater) continue;
                 if(searchVal && !video.title.toLowerCase().includes(searchVal)) continue;
@@ -281,37 +276,23 @@
                         <div class="card-info">
                             <div class="card-title">${video.title}</div>
                             <div class="actions">
-                                <button class="btn-icon ${isFav ? 'active' : ''}" onclick="toggleMeta('favorites', '${id}', ${JSON.stringify(video).replace(/"/g, '&quot;')})">
-                                    <i class="ph-fill ph-heart"></i>
-                                </button>
-                                <button class="btn-icon ${isLater ? 'active' : ''}" onclick="toggleMeta('watchLater', '${id}', ${JSON.stringify(video).replace(/"/g, '&quot;')})">
-                                    <i class="ph-fill ph-clock"></i>
-                                </button>
+                                <button class="btn-icon ${isFav ? 'active' : ''}" onclick="toggleMeta('favorites', '${id}', ${JSON.stringify(video).replace(/"/g, '&quot;')})"><i class="ph-fill ph-heart"></i></button>
+                                <button class="btn-icon ${isLater ? 'active' : ''}" onclick="toggleMeta('watchLater', '${id}', ${JSON.stringify(video).replace(/"/g, '&quot;')})"><i class="ph-fill ph-clock"></i></button>
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }
         }
 
         window.toggleMeta = (path, id, data) => {
-            if (!currentUID) {
-                showToast("❌ Regístrate para guardar favoritos");
-                return;
-            }
+            if (!currentUID) { showToast("❌ Login requerido"); return; }
             const itemRef = ref(db, `users/${currentUID}/${path}/${id}`);
-            if (userMetadata[path]?.[id]) {
-                remove(itemRef); showToast("Eliminado");
-            } else {
-                set(itemRef, data); showToast("Guardado ✨");
-            }
+            if (userMetadata[path]?.[id]) { remove(itemRef); showToast("Eliminado"); }
+            else { set(itemRef, data); showToast("Agregado ✨"); }
         };
 
         window.changeTab = (type, btn) => {
-            if(!currentUID && type !== 'all') {
-                showToast("Inicia sesión para ver tu lista");
-                return;
-            }
+            if(!currentUID && type !== 'all') { showToast("Login requerido"); return; }
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             renderGrid(allVideos, type);
