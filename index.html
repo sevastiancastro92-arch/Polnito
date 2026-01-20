@@ -50,54 +50,46 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .visitor-counter { background: rgba(255, 0, 85, 0.05); border: 1px solid var(--accent); color: var(--accent); padding: 6px 16px; border-radius: 50px; font-size: 0.75rem; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .visitor-counter { background: rgba(255, 0, 85, 0.05); border: 1px solid var(--accent); color: var(--accent); padding: 6px 16px; border-radius: 50px; font-size: 0.75rem; font-weight: 900; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
 
-        /* VIDEO GRID */
+        /* GRID & CARDS */
         .content-section { padding: 2rem; }
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: var(--side); border-radius: 15px; overflow: hidden; border: 1px solid var(--border); transition: 0.4s; cursor: pointer; }
-        .card:hover { transform: translateY(-8px); border-color: var(--accent); }
-        .card-thumb { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: var(--side); border-radius: 15px; overflow: hidden; border: 1px solid var(--border); transition: 0.4s; cursor: pointer; position: relative; }
+        .card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card-thumb { width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; }
         .card-thumb iframe { width: 100%; height: 100%; border: none; pointer-events: none; }
         .card-info { padding: 15px; }
-        .card-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 12px; color: #eee; }
-        .card-stats { display: flex; gap: 10px; font-size: 0.75rem; color: #666; }
+        .card-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 10px; color: #eee; height: 38px; overflow: hidden; }
+        .card-stats { display: flex; gap: 12px; font-size: 0.75rem; color: #666; font-weight: bold; }
 
-        /* VISTA DE VIDEO DETALLE (MODO CINE) */
-        #video-view {
-            position: fixed; inset: 0; background: var(--bg); z-index: 2500;
-            display: none; flex-direction: column; overflow-y: auto;
-        }
-        .video-header { padding: 1rem 5%; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
-        .player-container { width: 100%; background: #000; aspect-ratio: 16/9; max-height: 70vh; }
-        .player-container iframe { width: 100%; height: 100%; border: none; }
-        .video-details-box { padding: 2rem 5%; display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        /* VIDEO DETAIL VIEW */
+        #video-view { position: fixed; inset: 0; background: var(--bg); z-index: 2500; display: none; flex-direction: column; overflow-y: auto; animation: slideIn 0.4s ease; }
+        @keyframes slideIn { from { transform: translateY(100%); } to { transform: translateY(0); } }
         
-        .video-info-main h2 { font-size: 1.8rem; margin-bottom: 15px; }
-        .interaction-bar { display: flex; gap: 20px; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-        .stat-item { display: flex; align-items: center; gap: 8px; font-weight: bold; color: #888; }
-        .btn-like { background: var(--glass); border: 1px solid var(--border); color: white; padding: 8px 20px; border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
-        .btn-like.active { background: var(--accent); border-color: var(--accent); }
+        .v-header { padding: 1rem 5%; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); background: var(--side); }
+        .player-box { width: 100%; background: #000; aspect-ratio: 16/9; max-height: 65vh; }
+        .player-box iframe { width: 100%; height: 100%; border: none; }
+        
+        .v-details { padding: 2rem 5%; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .v-stats-bar { display: flex; align-items: center; gap: 25px; padding: 1.5rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+        .btn-like { background: var(--glass); border: 1px solid var(--border); color: white; padding: 10px 25px; border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.3s; font-weight: bold; }
+        .btn-like.active { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
 
-        /* COMENTARIOS */
-        .comments-section { background: var(--side); padding: 20px; border-radius: 15px; border: 1px solid var(--border); }
-        .comment-input-area { display: flex; gap: 10px; margin-bottom: 20px; }
-        .comment-input-area input { flex: 1; background: #000; border: 1px solid var(--border); padding: 12px; border-radius: 10px; color: white; outline: none; }
-        .comment-list { display: flex; flex-direction: column; gap: 15px; }
-        .comment-item { border-bottom: 1px solid var(--glass); padding-bottom: 10px; }
-        .comment-user { font-weight: bold; font-size: 0.85rem; color: var(--blue); margin-bottom: 4px; }
-        .comment-text { font-size: 0.9rem; color: #ccc; }
+        .comments-box { background: var(--side); padding: 25px; border-radius: 20px; border: 1px solid var(--border); }
+        .comment-input { display: flex; gap: 15px; margin-bottom: 25px; }
+        .comment-input input { flex: 1; background: #000; border: 1px solid var(--border); padding: 14px; border-radius: 12px; color: white; outline: none; }
+        .comment-item { padding: 12px 0; border-bottom: 1px solid var(--glass); }
+        .c-user { color: var(--blue); font-weight: 800; font-size: 0.85rem; margin-bottom: 5px; }
 
-        /* OTROS MODALES */
+        /* MODALES & OVERLAYS */
         #account-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 3000; backdrop-filter: blur(8px); }
         .modal-content { background: var(--side); padding: 2.5rem; border-radius: 30px; border: 1px solid var(--accent); width: 350px; text-align: center; }
-        .modal-btn { width: 100%; padding: 14px; margin-top: 12px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; }
-        .logout-btn { background: var(--accent); color: white; }
         
         #login-overlay { position: fixed; inset: 0; background: radial-gradient(circle, #1a1a1e, #050505); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .login-box { text-align: center; padding: 3rem; background: var(--side); border-radius: 35px; border: 1px solid var(--accent); width: 90%; max-width: 400px; }
-        .google-btn { width: 100%; padding: 16px; border-radius: 14px; border: none; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; background: white; color: black; margin-top: 2rem; }
-        .guest-btn { width: 100%; padding: 14px; border-radius: 14px; border: 1px solid var(--border); background: transparent; color: #888; cursor: pointer; margin-top: 10px; }
+        .login-box { text-align: center; padding: 3.5rem; background: var(--side); border-radius: 35px; border: 1px solid var(--accent); width: 90%; max-width: 420px; }
+        .google-btn { width: 100%; padding: 16px; border-radius: 14px; border: none; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; background: white; color: black; margin-top: 2rem; transition: 0.3s; }
+        .guest-btn { width: 100%; padding: 14px; border-radius: 14px; border: 1px solid var(--border); background: transparent; color: #888; cursor: pointer; margin-top: 12px; }
 
         #toast { position: fixed; bottom: 20px; right: 20px; background: var(--accent); padding: 12px 25px; border-radius: 10px; transform: translateY(100px); transition: 0.5s; z-index: 10000; font-weight: bold; }
     </style>
@@ -107,65 +99,55 @@
     <div id="login-overlay">
         <div class="login-box">
             <h1 class="logo">X<span>MODDER</span></h1>
-            <p style="color:#666; margin-top: 0.5rem; letter-spacing: 2px;">PREMIUM HUB</p>
+            <p style="color:#666; letter-spacing: 2px;">PREMIUM HUB ACCESS</p>
             <button class="google-btn" id="btn-login"><img src="https://www.google.com/favicon.ico" width="20"> INICIAR CON GOOGLE</button>
             <button class="guest-btn" id="btn-guest">Entrar como Invitado</button>
         </div>
     </div>
 
-    <div id="video-view">
-        <div class="video-header">
-            <div class="logo">X<span>MODDER</span></div>
-            <button class="nav-btn" onclick="closeVideo()" style="width: auto; padding: 10px 20px;"><i class="ph-bold ph-arrow-left"></i> Volver al Inicio</button>
-        </div>
-        <div class="player-container" id="player-container">
-            </div>
-        <div class="video-details-box">
-            <div class="video-info-main">
-                <h2 id="v-detail-title">Cargando...</h2>
-                <div class="interaction-bar">
-                    <div class="stat-item"><i class="ph-bold ph-eye"></i> <span id="v-detail-views">0</span> Vistas</div>
-                    <button class="btn-like" id="btn-like-action"><i class="ph-fill ph-thumbs-up"></i> <span id="v-detail-likes">0</span></button>
-                    <button class="btn-like" onclick="toggleMetaDetail('favorites')"><i class="ph-fill ph-heart"></i> Favorito</button>
-                </div>
-                
-                <div class="comments-section">
-                    <h4 style="margin-bottom: 15px;">Comentarios</h4>
-                    <div class="comment-input-area">
-                        <input type="text" id="comment-input" placeholder="Escribe un comentario...">
-                        <button class="nav-btn" id="btn-post-comment" style="width: auto; background: var(--accent); color: white;">Publicar</button>
-                    </div>
-                    <div class="comment-list" id="comment-list">
-                        </div>
-                </div>
-            </div>
-            
-            <div class="video-sidebar">
-                <p class="menu-label">Sugeridos</p>
-                <div id="side-grid" class="video-grid" style="grid-template-columns: 1fr;">
-                    </div>
-            </div>
+    <div id="account-modal">
+        <div class="modal-content">
+            <i class="ph-bold ph-user-gear" style="font-size: 3.5rem; color: var(--accent);"></i>
+            <h3 style="margin: 15px 0;">Mi Perfil</h3>
+            <p id="user-display-email" style="font-size: 0.85rem; color: #666; margin-bottom: 25px;"></p>
+            <button class="nav-btn" id="btn-logout-final" style="background: var(--accent); color: white; justify-content: center; padding: 15px; margin-bottom: 10px;">Cerrar Sesión</button>
+            <button class="nav-btn" onclick="toggleModal(false)" style="justify-content: center; border: 1px solid var(--border);">Volver</button>
         </div>
     </div>
 
-    <div id="account-modal">
-        <div class="modal-content">
-            <i class="ph-bold ph-user-gear" style="font-size: 3rem; color: var(--accent);"></i>
-            <h3>Mi Cuenta</h3>
-            <p id="user-display-email" style="font-size: 0.8rem; color: #666; margin-bottom: 20px;"></p>
-            <button class="modal-btn logout-btn" id="btn-logout-final">Cerrar Sesión</button>
-            <button class="modal-btn" onclick="toggleModal(false)">Volver</button>
+    <div id="video-view">
+        <div class="v-header">
+            <div class="logo">X<span>MODDER</span></div>
+            <button class="nav-btn" onclick="closeVideo()" style="width: auto; padding: 10px 20px; border: 1px solid var(--border);"><i class="ph-bold ph-arrow-left"></i> Volver</button>
+        </div>
+        <div class="player-box" id="player-box"></div>
+        <div class="v-details">
+            <h1 id="v-title-det" style="font-size: 2rem; margin-bottom: 10px;">Cargando...</h1>
+            <div class="v-stats-bar">
+                <div style="color: #888;"><i class="ph-bold ph-eye"></i> <span id="v-views-det">0</span> Vistas</div>
+                <button class="btn-like" id="btn-like-exec"><i class="ph-fill ph-thumbs-up"></i> <span id="v-likes-det">0</span> Likes</button>
+                <button class="btn-like" onclick="toggleMetaDetail('favorites')"><i class="ph-fill ph-heart"></i> Guardar</button>
+            </div>
+            
+            <div class="comments-box">
+                <h3 style="margin-bottom: 20px;"><i class="ph-bold ph-chats"></i> Comentarios</h3>
+                <div class="comment-input">
+                    <input type="text" id="c-input" placeholder="Escribe tu opinión...">
+                    <button class="nav-btn" id="btn-comment-exec" style="width: auto; background: var(--blue); color: black; font-weight: bold; padding: 0 25px;">Publicar</button>
+                </div>
+                <div id="c-list"></div>
+            </div>
         </div>
     </div>
 
     <aside id="sidebar">
         <div class="logo">X<span>MODDER</span></div>
         <div>
-            <p class="menu-label">Mi Cuenta</p>
-            <button class="nav-btn" onclick="toggleModal(true)" style="color: var(--blue);"><i class="ph-bold ph-user-gear"></i> Opciones de la cuenta</button>
+            <p class="menu-label">Gestión</p>
+            <button class="nav-btn" onclick="toggleModal(true)" style="color: var(--blue); background: rgba(0,210,255,0.05);"><i class="ph-bold ph-user-gear"></i> Opciones de la cuenta</button>
         </div>
         <div>
-            <p class="menu-label">Contenido</p>
+            <p class="menu-label">Navegación</p>
             <button class="nav-btn active" onclick="changeTab('all', this)"><i class="ph-bold ph-house"></i> Inicio</button>
             <button class="nav-btn" onclick="changeTab('favorites', this)"><i class="ph-bold ph-heart"></i> Favoritos</button>
             <button class="nav-btn" onclick="changeTab('watchLater', this)"><i class="ph-bold ph-clock"></i> Ver más tarde</button>
@@ -182,18 +164,18 @@
                 </div>
             </div>
             <div style="display: flex; align-items: center; gap: 20px;">
-                <div class="visitor-counter"><i class="ph-fill ph-users"></i> <span id="v-count">0</span> Visitas</div>
-                <img id="user-img" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="35" style="border-radius: 50%; border: 2px solid var(--border);">
+                <div class="visitor-counter"><i class="ph-fill ph-users-three"></i> <span id="total-v-count">0</span> Visitas</div>
+                <img id="user-img" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="38" style="border-radius: 50%; border: 2px solid var(--border);">
             </div>
         </div>
 
         <section class="content-section">
-            <h2 id="section-title" style="margin-bottom: 2rem;">Explorar</h2>
+            <h2 id="sect-title" style="margin-bottom: 2rem; border-left: 4px solid var(--accent); padding-left: 15px;">Explorar Contenido</h2>
             <div class="video-grid" id="main-grid"></div>
         </section>
     </main>
 
-    <div id="toast">Aviso</div>
+    <div id="toast">Notificación</div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -216,83 +198,98 @@
         const provider = new GoogleAuthProvider();
 
         let currentUID = null;
-        let activeVideoId = null;
+        let activeVidId = null;
         let allVideos = {};
         let userMetadata = {};
+        let isFirstLoad = true;
 
-        // --- VISITAS TOTALES ---
-        if (!sessionStorage.getItem('counted')) {
-            runTransaction(ref(db, 'stats/totalVisits'), (c) => (c || 0) + 1);
-            sessionStorage.setItem('counted', 'true');
+        // --- VISITAS TOTALES ACUMULADAS ---
+        const vCountRef = ref(db, 'stats/totalVisits');
+        if(!sessionStorage.getItem('v_counted')) {
+            runTransaction(vCountRef, c => (c || 0) + 1);
+            sessionStorage.setItem('v_counted', 'true');
         }
-        onValue(ref(db, 'stats/totalVisits'), (snap) => document.getElementById('v-count').innerText = snap.val() || 0);
+        onValue(vCountRef, s => document.getElementById('total-v-count').innerText = s.val() || 0);
 
-        // --- FUNCIONES DE VIDEO ---
+        // --- AUTH & AUTO-HIDE SIDEBAR ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUID = user.uid;
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('user-img').src = user.photoURL;
+                document.getElementById('user-img').style.borderColor = "var(--accent)";
+                document.getElementById('user-display-email').innerText = user.email;
+                syncData();
+
+                if (isFirstLoad) {
+                    setTimeout(() => {
+                        document.body.classList.add('sidebar-hidden');
+                        isFirstLoad = false;
+                    }, 2000);
+                }
+            } else {
+                currentUID = null;
+                renderGrid(allVideos);
+            }
+        });
+
+        // --- VIDEO DETAIL & LIKES ---
         window.openVideo = (id) => {
-            activeVideoId = id;
+            activeVidId = id;
             const video = allVideos[id];
+            runTransaction(ref(db, `videos/${id}/views`), c => (c || 0) + 1);
             
-            // Incrementar Vistas del video
-            runTransaction(ref(db, `videos/${id}/views`), (c) => (c || 0) + 1);
-
-            // UI
             document.getElementById('video-view').style.display = 'flex';
-            document.getElementById('player-container').innerHTML = `<iframe src="${video.link}" allowfullscreen></iframe>`;
-            document.getElementById('v-detail-title').innerText = video.title;
+            document.getElementById('player-box').innerHTML = `<iframe src="${video.link}" allowfullscreen></iframe>`;
+            document.getElementById('v-title-det').innerText = video.title;
             
-            // Escuchar Likes y Comentarios en tiempo real
-            syncVideoStats(id);
+            syncStats(id);
             syncComments(id);
-            renderSideGrid();
         };
 
         window.closeVideo = () => {
             document.getElementById('video-view').style.display = 'none';
-            document.getElementById('player-container').innerHTML = '';
-            activeVideoId = null;
+            document.getElementById('player-box').innerHTML = '';
+            activeVidId = null;
         };
 
-        function syncVideoStats(id) {
-            onValue(ref(db, `videos/${id}`), (snap) => {
-                const data = snap.val();
-                document.getElementById('v-detail-views').innerText = data.views || 0;
-                document.getElementById('v-detail-likes').innerText = data.likesCount || 0;
+        function syncStats(id) {
+            onValue(ref(db, `videos/${id}`), s => {
+                const d = s.val();
+                document.getElementById('v-views-det').innerText = d.views || 0;
+                document.getElementById('v-likes-det').innerText = d.likesCount || 0;
             });
-
-            // Verificar si el usuario ya dio like
             if(currentUID) {
-                onValue(ref(db, `likes/${id}/${currentUID}`), (snap) => {
-                    const btn = document.getElementById('btn-like-action');
-                    if(snap.exists()) btn.classList.add('active');
-                    else btn.classList.remove('active');
+                onValue(ref(db, `likes/${id}/${currentUID}`), s => {
+                    const btn = document.getElementById('btn-like-exec');
+                    s.exists() ? btn.classList.add('active') : btn.classList.remove('active');
                 });
             }
         }
 
-        document.getElementById('btn-like-action').onclick = () => {
+        document.getElementById('btn-like-exec').onclick = () => {
             if(!currentUID) return showToast("❌ Inicia sesión para dar Like");
             
-            const likeRef = ref(db, `likes/${activeVideoId}/${currentUID}`);
-            const countRef = ref(db, `videos/${activeVideoId}/likesCount`);
+            const likeRef = ref(db, `likes/${activeVidId}/${currentUID}`);
+            const countRef = ref(db, `videos/${activeVidId}/likesCount`);
 
             runTransaction(likeRef, (exists) => {
                 if(exists) {
-                    runTransaction(countRef, (c) => (c || 1) - 1);
-                    return null; // Eliminar el like
+                    runTransaction(countRef, c => (c || 1) - 1);
+                    return null; // Quita el like
                 } else {
-                    runTransaction(countRef, (c) => (c || 0) + 1);
-                    return true; // Poner el like
+                    runTransaction(countRef, c => (c || 0) + 1);
+                    return true; // Solo permite 1 like por usuario
                 }
             });
         };
 
         // --- COMENTARIOS ---
-        document.getElementById('btn-post-comment').onclick = () => {
-            const input = document.getElementById('comment-input');
+        document.getElementById('btn-comment-exec').onclick = () => {
+            const input = document.getElementById('c-input');
             if(!currentUID) return showToast("❌ Inicia sesión para comentar");
             if(!input.value.trim()) return;
-
-            push(ref(db, `comments/${activeVideoId}`), {
+            push(ref(db, `comments/${activeVidId}`), {
                 uid: currentUID,
                 name: auth.currentUser.displayName,
                 text: input.value,
@@ -302,44 +299,26 @@
         };
 
         function syncComments(id) {
-            onValue(ref(db, `comments/${id}`), (snap) => {
-                const list = document.getElementById('comment-list');
+            onValue(ref(db, `comments/${id}`), s => {
+                const list = document.getElementById('c-list');
                 list.innerHTML = '';
-                snap.forEach((child) => {
+                s.forEach(child => {
                     const c = child.val();
-                    list.innerHTML += `
-                        <div class="comment-item">
-                            <div class="comment-user">${c.name}</div>
-                            <div class="comment-text">${c.text}</div>
-                        </div>
-                    `;
+                    list.innerHTML += `<div class="comment-item"><div class="c-user">${c.name}</div><div style="color:#aaa; font-size:0.9rem;">${c.text}</div></div>`;
                 });
             });
         }
 
-        // --- LÓGICA CORE ---
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                currentUID = user.uid;
-                document.getElementById('login-overlay').style.display = 'none';
-                document.getElementById('user-img').src = user.photoURL;
-                document.getElementById('user-display-email').innerText = user.email;
-                syncUserData();
-            } else {
-                currentUID = null;
-                renderGrid(allVideos);
-            }
-        });
-
-        function syncUserData() {
-            onValue(ref(db, `users/${currentUID}`), (snap) => {
-                userMetadata = snap.val() || {};
+        // --- CORE DATA ---
+        function syncData() {
+            onValue(ref(db, `users/${currentUID}`), s => {
+                userMetadata = s.val() || {};
                 renderGrid(allVideos);
             });
         }
 
-        onValue(ref(db, 'videos'), (snap) => {
-            allVideos = snap.val() || {};
+        onValue(ref(db, 'videos'), s => {
+            allVideos = s.val() || {};
             renderGrid(allVideos);
         });
 
@@ -361,43 +340,29 @@
                                 <span><i class="ph ph-thumbs-up"></i> ${v.likesCount || 0}</span>
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }
         }
 
-        function renderSideGrid() {
-            const side = document.getElementById('side-grid');
-            side.innerHTML = '';
-            let i = 0;
-            for(let id in allVideos) {
-                if(i > 4) break;
-                if(id === activeVideoId) continue;
-                const v = allVideos[id];
-                side.innerHTML += `
-                    <div class="card" onclick="openVideo('${id}')" style="margin-bottom:10px;">
-                        <div class="card-thumb" style="height:100px;"><iframe src="${v.link}"></iframe></div>
-                        <div class="card-info" style="padding:10px;">
-                            <div class="card-title" style="font-size:0.75rem; height:auto;">${v.title}</div>
-                        </div>
-                    </div>
-                `;
-                i++;
-            }
-        }
-
-        // --- HELPERS ---
-        window.toggleModal = (s) => document.getElementById('account-modal').style.display = s ? 'flex' : 'none';
-        document.getElementById('btn-guest').onclick = () => document.getElementById('login-overlay').style.display = 'none';
-        document.getElementById('btn-logout-final').onclick = () => location.reload();
+        // --- HELPERS UI ---
         document.getElementById('toggle-btn').onclick = () => document.body.classList.toggle('sidebar-hidden');
         document.getElementById('btn-login').onclick = () => signInWithPopup(auth, provider);
+        document.getElementById('btn-guest').onclick = () => document.getElementById('login-overlay').style.display = 'none';
+        document.getElementById('btn-logout-final').onclick = () => location.reload();
+        window.toggleModal = (s) => document.getElementById('account-modal').style.display = s ? 'flex' : 'none';
         
+        window.changeTab = (type, btn) => {
+            if(!currentUID && type !== 'all') return showToast("Inicia sesión para ver tu lista");
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderGrid(allVideos, type);
+        };
+
         window.toggleMetaDetail = (path) => {
-            if(!currentUID) return showToast("❌ Inicia sesión");
-            const refM = ref(db, `users/${currentUID}/${path}/${activeVideoId}`);
-            if(userMetadata[path]?.[activeVideoId]) remove(refM);
-            else set(refM, allVideos[activeVideoId]);
+            if(!currentUID) return showToast("❌ Regístrate para guardar");
+            const refM = ref(db, `users/${currentUID}/${path}/${activeVidId}`);
+            if(userMetadata[path]?.[activeVidId]) remove(refM);
+            else set(refM, allVideos[activeVidId]);
             showToast("Lista actualizada ✨");
         };
 
