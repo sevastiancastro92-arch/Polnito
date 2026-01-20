@@ -25,21 +25,21 @@
         aside {
             width: var(--sidebar-width); background: var(--side); height: 100%; 
             border-right: 1px solid var(--border); display: flex; flex-direction: column; 
-            padding: 2rem 1.5rem; gap: 2rem; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 2rem 1.5rem; gap: 1.5rem; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative; z-index: 1001;
         }
         body.sidebar-hidden aside { margin-left: calc(-1 * var(--sidebar-width)); opacity: 0; pointer-events: none; }
 
-        .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-align: center; }
+        .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-align: center; margin-bottom: 10px; }
         .logo span { color: var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
 
-        .menu-label { font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .menu-label { font-size: 0.65rem; color: #444; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px; margin-top: 10px; }
         .nav-btn {
             width: 100%; background: none; border: none; color: #888; display: flex; 
             align-items: center; gap: 12px; padding: 12px; cursor: pointer; 
-            border-radius: 12px; transition: 0.3s; font-size: 0.95rem; margin-bottom: 5px;
+            border-radius: 12px; transition: 0.3s; font-size: 0.95rem;
         }
-        .nav-btn:hover, .nav-btn.active { background: var(--glass); color: white; }
+        .nav-btn:hover { background: var(--glass); color: white; }
         .nav-btn.active { border-left: 3px solid var(--accent); background: linear-gradient(90deg, rgba(255,0,85,0.1), transparent); color: white; }
 
         /* MAIN & TOPBAR */
@@ -51,16 +51,13 @@
             border-bottom: 1px solid var(--border);
         }
 
-        /* CONTADOR DE VISITANTES */
+        /* CONTADOR DE VISITAS TOTALES */
         .visitor-counter {
-            background: rgba(0, 210, 255, 0.1); border: 1px solid var(--blue);
-            color: var(--blue); padding: 5px 15px; border-radius: 20px;
-            font-size: 0.8rem; font-weight: 800; display: flex; align-items: center; gap: 8px;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+            background: rgba(255, 0, 85, 0.05); border: 1px solid var(--accent);
+            color: var(--accent); padding: 6px 16px; border-radius: 50px;
+            font-size: 0.75rem; font-weight: 900; display: flex; align-items: center; gap: 8px;
+            text-transform: uppercase; letter-spacing: 1px;
         }
-        .dot { width: 8px; height: 8px; background: var(--blue); border-radius: 50%; box-shadow: 0 0 10px var(--blue); animation: pulse 1.5s infinite; }
-
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         .left-controls { display: flex; align-items: center; gap: 15px; flex: 1; }
         .toggle-menu { background: var(--glass); border: 1px solid var(--border); color: white; width: 40px; height: 40px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
@@ -81,15 +78,16 @@
 
         /* MODAL OPCIONES DE CUENTA */
         #account-modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-            display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(5px);
+            position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+            display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(8px);
         }
         .modal-content {
-            background: var(--side); padding: 2rem; border-radius: 20px; border: 1px solid var(--accent);
-            width: 320px; text-align: center; box-shadow: 0 0 50px rgba(255,0,85,0.2);
+            background: var(--side); padding: 2.5rem; border-radius: 30px; border: 1px solid var(--accent);
+            width: 350px; text-align: center; box-shadow: 0 0 50px rgba(255,0,85,0.2); animation: pop 0.3s ease;
         }
-        .modal-content h3 { margin-bottom: 1.5rem; color: var(--accent); }
-        .modal-btn { width: 100%; padding: 12px; margin-top: 10px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; }
+        @keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .modal-btn { width: 100%; padding: 14px; margin-top: 12px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .logout-btn { background: var(--accent); color: white; }
         .close-btn { background: var(--glass); color: #888; border: 1px solid var(--border); }
 
@@ -99,7 +97,7 @@
         .google-btn { width: 100%; padding: 16px; border-radius: 14px; border: none; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; background: white; color: black; margin-top: 2rem; }
         .guest-btn { width: 100%; padding: 14px; border-radius: 14px; border: 1px solid var(--border); background: transparent; color: #888; cursor: pointer; margin-top: 10px; }
 
-        #toast { position: fixed; bottom: 20px; right: 20px; background: var(--accent); padding: 12px 25px; border-radius: 10px; transform: translateY(100px); transition: 0.5s; z-index: 10000; }
+        #toast { position: fixed; bottom: 20px; right: 20px; background: var(--accent); padding: 12px 25px; border-radius: 10px; transform: translateY(100px); transition: 0.5s; z-index: 10000; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -107,7 +105,7 @@
     <div id="login-overlay">
         <div class="login-box">
             <h1 class="logo">X<span>MODDER</span></h1>
-            <p style="color:#666; margin-top: 0.5rem;">PREMIUM CONTENT HUB</p>
+            <p style="color:#666; margin-top: 0.5rem; letter-spacing: 2px;">MODS & PREMIUM CONTENT</p>
             <button class="google-btn" id="btn-login"><img src="https://www.google.com/favicon.ico" width="20"> INICIAR CON GOOGLE</button>
             <button class="guest-btn" id="btn-guest">Entrar más tarde (Invitado)</button>
         </div>
@@ -115,25 +113,27 @@
 
     <div id="account-modal">
         <div class="modal-content">
-            <i class="ph-bold ph-user-circle" style="font-size: 3rem; color: var(--accent);"></i>
-            <h3>Opciones de la cuenta</h3>
-            <p id="user-display-email" style="font-size: 0.8rem; color: #666; margin-bottom: 20px;"></p>
+            <i class="ph-bold ph-gear-six" style="font-size: 3rem; color: var(--accent);"></i>
+            <h3 style="margin: 15px 0;">Configuración</h3>
+            <p id="user-display-email" style="font-size: 0.8rem; color: #666; margin-bottom: 20px;">Sesión de invitado</p>
             <button class="modal-btn logout-btn" id="btn-logout-final">Cerrar Sesión</button>
-            <button class="modal-btn close-btn" onclick="toggleModal(false)">Volver</button>
+            <button class="modal-btn close-btn" onclick="toggleModal(false)">Cerrar Ventana</button>
         </div>
     </div>
 
     <aside id="sidebar">
         <div class="logo">X<span>MODDER</span></div>
+        
         <div>
-            <p class="menu-label">Principal</p>
+            <p class="menu-label">Mi Cuenta</p>
+            <button class="nav-btn" onclick="toggleModal(true)" style="color: var(--blue); background: rgba(0, 210, 255, 0.05);"><i class="ph-bold ph-user-gear"></i> Opciones de la cuenta</button>
+        </div>
+
+        <div>
+            <p class="menu-label">Contenido</p>
             <button class="nav-btn active" onclick="changeTab('all', this)"><i class="ph-bold ph-house"></i> Inicio</button>
             <button class="nav-btn" onclick="changeTab('favorites', this)"><i class="ph-bold ph-heart"></i> Favoritos</button>
             <button class="nav-btn" onclick="changeTab('watchLater', this)"><i class="ph-bold ph-clock"></i> Ver más tarde</button>
-        </div>
-        <div style="margin-top: auto;">
-            <p class="menu-label">Sistema</p>
-            <button class="nav-btn" onclick="toggleModal(true)" style="color: var(--blue);"><i class="ph-bold ph-gear"></i> Opciones de la cuenta</button>
         </div>
     </aside>
 
@@ -143,21 +143,21 @@
                 <button class="toggle-menu" id="toggle-btn"><i class="ph-bold ph-list"></i></button>
                 <div class="search-box">
                     <i class="ph-bold ph-magnifying-glass"></i>
-                    <input type="text" id="search-input" placeholder="Buscar en XMODDER...">
+                    <input type="text" id="search-input" placeholder="Buscar mods o videos...">
                 </div>
             </div>
             
             <div style="display: flex; align-items: center; gap: 20px;">
                 <div class="visitor-counter">
-                    <div class="dot"></div>
-                    <span id="v-count">0</span> ONLINE
+                    <i class="ph-fill ph-users"></i>
+                    <span id="v-count">0</span> Visitas
                 </div>
                 <img id="user-img" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="35" style="border-radius: 50%; border: 2px solid var(--border);">
             </div>
         </div>
 
         <section class="content-section">
-            <h2 id="section-title" style="margin-bottom: 2rem;">Contenido VIP</h2>
+            <h2 id="section-title" style="margin-bottom: 2rem;">Explorar XMODDER</h2>
             <div class="video-grid" id="main-grid"></div>
         </section>
     </main>
@@ -167,7 +167,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getDatabase, ref, onValue, set, remove, increment, onDisconnect, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getDatabase, ref, onValue, set, remove, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCEM7fa1Erl2NLpM8VTRYCVyHW-cl-JEjw",
@@ -189,19 +189,23 @@
         let userMetadata = {};
         let isFirstLoad = true;
 
-        // --- LÓGICA DE VISITANTES EN TIEMPO REAL ---
-        const visitorCountRef = ref(db, 'stats/visitorCount');
+        // --- LÓGICA DE VISITAS TOTALES (ACUMULABLE) ---
+        const totalVisitsRef = ref(db, 'stats/totalVisits');
         
-        // Incrementar al entrar, decrementar al salir
-        runTransaction(visitorCountRef, (count) => (count || 0) + 1);
-        onDisconnect(visitorCountRef).set(increment(-1));
+        // Solo aumenta la cuenta si es una sesión nueva en el navegador
+        if (!sessionStorage.getItem('counted')) {
+            runTransaction(totalVisitsRef, (currentValue) => {
+                return (currentValue || 0) + 1;
+            });
+            sessionStorage.setItem('counted', 'true');
+        }
 
-        // Escuchar cambios en tiempo real
-        onValue(visitorCountRef, (snap) => {
-            document.getElementById('v-count').innerText = snap.val() || 1;
+        // Actualización en tiempo real del número
+        onValue(totalVisitsRef, (snap) => {
+            document.getElementById('v-count').innerText = snap.val() || 0;
         });
 
-        // --- LÓGICA MODAL CUENTA ---
+        // MODAL
         window.toggleModal = (show) => {
             document.getElementById('account-modal').style.display = show ? 'flex' : 'none';
         };
@@ -215,7 +219,7 @@
         // UI & AUTH
         document.getElementById('btn-guest').onclick = () => {
             document.getElementById('login-overlay').style.display = 'none';
-            showToast("Explorando como invitado");
+            showToast("Modo Invitado Activo");
         };
 
         document.getElementById('toggle-btn').onclick = () => document.body.classList.toggle('sidebar-hidden');
@@ -292,20 +296,20 @@
 
         window.toggleMeta = (path, id, data) => {
             if (!currentUID) {
-                showToast("❌ Inicia sesión para guardar favoritos");
+                showToast("❌ Regístrate para guardar favoritos");
                 return;
             }
             const itemRef = ref(db, `users/${currentUID}/${path}/${id}`);
             if (userMetadata[path]?.[id]) {
                 remove(itemRef); showToast("Eliminado");
             } else {
-                set(itemRef, data); showToast("Agregado ✨");
+                set(itemRef, data); showToast("Guardado ✨");
             }
         };
 
         window.changeTab = (type, btn) => {
             if(!currentUID && type !== 'all') {
-                showToast("Inicia sesión para ver tu biblioteca");
+                showToast("Inicia sesión para ver tu lista");
                 return;
             }
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
