@@ -21,13 +21,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow: hidden; display: flex; height: 100vh; }
 
-        /* SIDEBAR */
+        /* --- SIDEBAR (EL QUE SE OCULTA) --- */
         aside {
             width: var(--sidebar-width); background: var(--side); height: 100%; 
             border-right: 1px solid var(--border); display: flex; flex-direction: column; 
             padding: 2rem 1.5rem; gap: 1.5rem; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative; z-index: 1001;
         }
+        /* Clase para ocultar solo el Sidebar lateral */
         body.sidebar-hidden aside { margin-left: calc(-1 * var(--sidebar-width)); opacity: 0; pointer-events: none; }
 
         .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-align: center; margin-bottom: 10px; }
@@ -42,10 +43,10 @@
         .nav-btn:hover { background: var(--glass); color: white; }
         .nav-btn.active { border-left: 3px solid var(--accent); background: linear-gradient(90deg, rgba(255,0,85,0.1), transparent); color: white; }
 
-        /* MAIN & TOPBAR */
+        /* --- BARRA SUPERIOR (SIEMPRE VISIBLE) --- */
         main { flex: 1; overflow-y: auto; position: relative; scroll-behavior: smooth; transition: all 0.5s ease; }
         .top-bar {
-            position: sticky; top: 0; background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(20px);
+            position: sticky; top: 0; background: rgba(10, 10, 12, 0.9); backdrop-filter: blur(20px);
             padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000;
             border-bottom: 1px solid var(--border);
         }
@@ -56,43 +57,35 @@
         .content-section { padding: 2rem; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
         .card { background: var(--side); border-radius: 15px; overflow: hidden; border: 1px solid var(--border); transition: 0.4s; cursor: pointer; }
-        .card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .card-thumb { width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; }
+        .card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+        .card-thumb { width: 100%; aspect-ratio: 16/9; background: #000; }
         .card-thumb iframe { width: 100%; height: 100%; border: none; pointer-events: none; }
         .card-info { padding: 15px; }
         .card-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 10px; color: #eee; height: 38px; overflow: hidden; }
         .card-stats { display: flex; gap: 12px; font-size: 0.75rem; color: #666; font-weight: bold; }
 
-        /* MODO CINE (DETAIL VIEW) */
-        #video-view { position: fixed; inset: 0; background: var(--bg); z-index: 2500; display: none; flex-direction: column; overflow-y: auto; animation: slideUp 0.4s ease; }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        
+        /* MODALES Y VISTA DE VIDEO */
+        #video-view { position: fixed; inset: 0; background: var(--bg); z-index: 2500; display: none; flex-direction: column; overflow-y: auto; }
         .v-header { padding: 1rem 5%; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); background: var(--side); }
         .player-box { width: 100%; background: #000; aspect-ratio: 16/9; max-height: 65vh; }
         .player-box iframe { width: 100%; height: 100%; border: none; }
         
         .v-details { padding: 2rem 5%; max-width: 1200px; margin: 0 auto; width: 100%; }
         .v-stats-bar { display: flex; align-items: center; gap: 25px; padding: 1.5rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
-        
         .btn-like { background: var(--glass); border: 1px solid var(--border); color: white; padding: 10px 25px; border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.3s; font-weight: bold; }
         .btn-like.active { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
-        .btn-like:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* COMENTARIOS */
         .comments-box { background: var(--side); padding: 25px; border-radius: 20px; border: 1px solid var(--border); }
         .comment-input { display: flex; gap: 15px; margin-bottom: 25px; }
         .comment-input input { flex: 1; background: #000; border: 1px solid var(--border); padding: 14px; border-radius: 12px; color: white; outline: none; }
-        .comment-item { padding: 12px 0; border-bottom: 1px solid var(--glass); }
-        .c-user { color: var(--blue); font-weight: 800; font-size: 0.85rem; margin-bottom: 5px; }
 
-        /* MODALES & OVERLAYS */
+        /* CUENTA Y LOGIN */
         #account-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 3000; backdrop-filter: blur(8px); }
         .modal-content { background: var(--side); padding: 2.5rem; border-radius: 30px; border: 1px solid var(--accent); width: 350px; text-align: center; }
         
         #login-overlay { position: fixed; inset: 0; background: radial-gradient(circle, #1a1a1e, #050505); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .login-box { text-align: center; padding: 3.5rem; background: var(--side); border-radius: 35px; border: 1px solid var(--accent); width: 90%; max-width: 420px; }
         .google-btn { width: 100%; padding: 16px; border-radius: 14px; border: none; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; background: white; color: black; margin-top: 2rem; }
-        .guest-btn { width: 100%; padding: 14px; border-radius: 14px; border: 1px solid var(--border); background: transparent; color: #888; cursor: pointer; margin-top: 12px; }
 
         #toast { position: fixed; bottom: 20px; right: 20px; background: var(--accent); padding: 12px 25px; border-radius: 10px; transform: translateY(100px); transition: 0.5s; z-index: 10000; font-weight: bold; }
     </style>
@@ -104,7 +97,7 @@
             <h1 class="logo">X<span>MODDER</span></h1>
             <p style="color:#666; letter-spacing: 2px;">PREMIUM HUB ACCESS</p>
             <button class="google-btn" id="btn-login"><img src="https://www.google.com/favicon.ico" width="20"> INICIAR CON GOOGLE</button>
-            <button class="guest-btn" id="btn-guest">Entrar como Invitado</button>
+            <button class="guest-btn" onclick="document.getElementById('login-overlay').style.display = 'none'" style="width:100%; padding:14px; border-radius:14px; border:1px solid var(--border); background:transparent; color:#888; cursor:pointer; margin-top:12px;">Entrar como Invitado</button>
         </div>
     </div>
 
@@ -121,7 +114,7 @@
     <div id="video-view">
         <div class="v-header">
             <div class="logo">X<span>MODDER</span></div>
-            <button class="nav-btn" onclick="closeVideo()" style="width: auto; padding: 10px 20px; border: 1px solid var(--border);"><i class="ph-bold ph-arrow-left"></i> Volver al Inicio</button>
+            <button class="nav-btn" onclick="closeVideo()" style="width: auto; padding: 10px 20px; border: 1px solid var(--border);"><i class="ph-bold ph-arrow-left"></i> Volver</button>
         </div>
         <div class="player-box" id="player-box"></div>
         <div class="v-details">
@@ -129,12 +122,11 @@
             <div class="v-stats-bar">
                 <div style="color: #888; font-weight: bold;"><i class="ph-bold ph-eye"></i> <span id="v-views-det">0</span> Vistas</div>
                 <button class="btn-like" id="btn-like-exec"><i class="ph-fill ph-thumbs-up"></i> <span id="v-likes-det">0</span> Likes</button>
-                <button class="btn-like" onclick="toggleMetaDetail('favorites')"><i class="ph-fill ph-heart"></i> Favorito</button>
+                <button class="btn-like" onclick="toggleMetaDetail('favorites')"><i class="ph-fill ph-heart"></i> Guardar</button>
             </div>
-            
             <div class="comments-box">
-                <h3 style="margin-bottom: 20px;"><i class="ph-bold ph-chats"></i> Comentarios</h3>
-                <div class="comment-input">
+                <h3>Comentarios</h3>
+                <div class="comment-input" style="margin-top:15px;">
                     <input type="text" id="c-input" placeholder="Escribe tu opinión...">
                     <button class="nav-btn" id="btn-comment-exec" style="width: auto; background: var(--blue); color: black; font-weight: bold; padding: 0 25px;">Publicar</button>
                 </div>
@@ -160,10 +152,10 @@
     <main>
         <div class="top-bar">
             <div class="left-controls">
-                <button class="toggle-menu" id="toggle-btn"><i class="ph-bold ph-list"></i></button>
-                <div class="search-box">
+                <button class="toggle-menu" id="toggle-btn" style="background:var(--glass); border:1px solid var(--border); color:white; width:40px; height:40px; border-radius:10px; cursor:pointer;"><i class="ph-bold ph-list"></i></button>
+                <div class="search-box" style="background:var(--glass); border:1px solid var(--border); padding:8px 15px; border-radius:10px; display:flex; align-items:center; gap:10px; width:100%; max-width:300px;">
                     <i class="ph-bold ph-magnifying-glass"></i>
-                    <input type="text" id="search-input" placeholder="Buscar en XMODDER...">
+                    <input type="text" id="search-input" placeholder="Buscar en XMODDER..." style="background:none; border:none; color:white; outline:none;">
                 </div>
             </div>
             <div style="display: flex; align-items: center; gap: 20px;">
@@ -173,7 +165,7 @@
         </div>
 
         <section class="content-section">
-            <h2 id="sect-title" style="margin-bottom: 2rem; border-left: 4px solid var(--accent); padding-left: 15px;">Recién Agregados</h2>
+            <h2 id="sect-title" style="margin-bottom: 2rem; border-left: 4px solid var(--accent); padding-left: 15px;">Explorar</h2>
             <div class="video-grid" id="main-grid"></div>
         </section>
     </main>
@@ -206,7 +198,7 @@
         let userMetadata = {};
         let isFirstLoad = true;
 
-        // --- VISITAS TOTALES ACUMULADAS ---
+        // --- CONTADOR DE VISITAS TOTALES ---
         const vCountRef = ref(db, 'stats/totalVisits');
         if(!sessionStorage.getItem('v_counted')) {
             runTransaction(vCountRef, c => (c || 0) + 1);
@@ -214,7 +206,7 @@
         }
         onValue(vCountRef, s => document.getElementById('total-v-count').innerText = s.val() || 0);
 
-        // --- AUTH & AUTO-OCULTADO (2s) ---
+        // --- AUTH & AUTO-OCULTADO SIDEBAR (2s) ---
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUID = user.uid;
@@ -225,6 +217,7 @@
 
                 if (isFirstLoad) {
                     setTimeout(() => {
+                        // AQUÍ SE CIERRA SOLO EL MENU LATERAL (SIDEBAR)
                         document.body.classList.add('sidebar-hidden');
                         isFirstLoad = false;
                     }, 2000);
@@ -235,7 +228,7 @@
             }
         });
 
-        // --- LÓGICA DE LIKES (SOLO 1 POR USUARIO) ---
+        // --- LIKE ÚNICO (BLOQUEANTE) ---
         document.getElementById('btn-like-exec').onclick = async () => {
             if(!currentUID) return showToast("❌ Inicia sesión para dar Like");
             
@@ -243,33 +236,29 @@
             const likeRef = ref(db, `likes/${activeVidId}/${currentUID}`);
             const countRef = ref(db, `videos/${activeVidId}/likesCount`);
 
-            likeBtn.disabled = true; // Bloqueo anti-spam
+            likeBtn.disabled = true;
 
             const snap = await get(likeRef);
             if(snap.exists()) {
-                // Si ya existe, lo quitamos
                 await remove(likeRef);
                 await runTransaction(countRef, c => (c || 1) - 1);
                 showToast("Like eliminado");
             } else {
-                // Si no existe, lo agregamos
                 await set(likeRef, true);
                 await runTransaction(countRef, c => (c || 0) + 1);
-                showToast("¡Te gusta este video! ❤️");
+                showToast("¡Te gusta esto! ❤️");
             }
             likeBtn.disabled = false;
         };
 
-        // --- VIDEO VIEW (MODO CINE) ---
+        // --- VIDEOS CORE ---
         window.openVideo = (id) => {
             activeVidId = id;
             const video = allVideos[id];
             runTransaction(ref(db, `videos/${id}/views`), c => (c || 0) + 1);
-            
             document.getElementById('video-view').style.display = 'flex';
             document.getElementById('player-box').innerHTML = `<iframe src="${video.link}" allowfullscreen></iframe>`;
             document.getElementById('v-title-det').innerText = video.title;
-            
             syncStats(id);
             syncComments(id);
         };
@@ -294,11 +283,9 @@
             }
         }
 
-        // --- COMENTARIOS ---
         document.getElementById('btn-comment-exec').onclick = () => {
             const input = document.getElementById('c-input');
-            if(!currentUID) return showToast("❌ Inicia sesión para comentar");
-            if(!input.value.trim()) return;
+            if(!currentUID || !input.value.trim()) return;
             push(ref(db, `comments/${activeVidId}`), {
                 uid: currentUID,
                 name: auth.currentUser.displayName,
@@ -314,12 +301,11 @@
                 list.innerHTML = '';
                 s.forEach(child => {
                     const c = child.val();
-                    list.innerHTML += `<div class="comment-item"><div class="c-user">${c.name}</div><div style="color:#aaa; font-size:0.9rem;">${c.text}</div></div>`;
+                    list.innerHTML += `<div style="padding:10px 0; border-bottom:1px solid #222;"><div style="color:var(--blue); font-weight:bold; font-size:0.8rem;">${c.name}</div><div style="color:#aaa;">${c.text}</div></div>`;
                 });
             });
         }
 
-        // --- CORE DATA ---
         function syncUserData() {
             onValue(ref(db, `users/${currentUID}`), s => {
                 userMetadata = s.val() || {};
@@ -354,26 +340,25 @@
             }
         }
 
-        // --- HELPERS UI ---
+        // HELPERS UI
         document.getElementById('toggle-btn').onclick = () => document.body.classList.toggle('sidebar-hidden');
         document.getElementById('btn-login').onclick = () => signInWithPopup(auth, provider);
-        document.getElementById('btn-guest').onclick = () => document.getElementById('login-overlay').style.display = 'none';
         document.getElementById('btn-logout-final').onclick = () => location.reload();
         window.toggleModal = (s) => document.getElementById('account-modal').style.display = s ? 'flex' : 'none';
         
         window.changeTab = (type, btn) => {
-            if(!currentUID && type !== 'all') return showToast("Inicia sesión para ver tu lista");
+            if(!currentUID && type !== 'all') return showToast("Inicia sesión para esto");
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             renderGrid(allVideos, type);
         };
 
         window.toggleMetaDetail = (path) => {
-            if(!currentUID) return showToast("❌ Regístrate para guardar");
+            if(!currentUID) return showToast("❌ Regístrate primero");
             const refM = ref(db, `users/${currentUID}/${path}/${activeVidId}`);
             if(userMetadata[path]?.[activeVidId]) remove(refM);
             else set(refM, allVideos[activeVidId]);
-            showToast("Lista actualizada ✨");
+            showToast("Lista actualizada");
         };
 
         function showToast(m) {
